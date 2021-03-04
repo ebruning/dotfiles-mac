@@ -1,27 +1,68 @@
+"install plug-vim
+if empty(glob('~/.config/nvim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+  autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
+endif
+
 call plug#begin('~/.config/nvim/plugged')
 
-" Themes
+" Appearence {{{ "
+Plug 'itchyny/lightline.vim'		" Status line
+Plug 'connorholyday/vim-snazzy'
+Plug 'dylanaraps/wal.vim'
+Plug 'mhinz/vim-startify'
 Plug 'cocopon/iceberg.vim'
+Plug 'doums/darcula'
+Plug 'dracula/vim', { 'name': 'dracula' }
 
-" Youtube
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'tiagofumo/vim-nerdtree-syntax-highlight'
-Plug 'ryanoasis/vim-devicons'
+" Side bars{{{
+Plug 'scrooloose/nerdtree'		" NERD Tree
+Plug 'Xuyuanp/nerdtree-git-plugin' 	" show git status in Nerd tree
+Plug 'mbbill/undotree'
+Plug  'preservim/tagbar'
+" }}}
+Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}} " Completion as in vscode
+Plug 'junegunn/goyo.vim' " start menu
+"Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
+"Plug 'sheerun/vim-polyglot' "all lang packs :)
+
+
+"JS {{{
+Plug 'https://github.com/pangloss/vim-javascript.git'
+Plug 'posva/vim-vue'
+Plug 'prettier/vim-prettier'
+Plug 'dense-analysis/ale' "ES-Lint
+Plug 'pangloss/vim-javascript'
+Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'javascript.jsx','typescript'],  'do': 'make install' }
+Plug 'honza/vim-snippets'
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'francoiscabrol/ranger.vim'
+Plug 'rbgrouleff/bclose.vim'
+Plug 'SirVer/ultisnips'
+Plug 'albanm/vuetify-vim'
+"}}}
+
+"}}}
+" Markdown {{{
+Plug 'godlygeek/tabular'
+Plug 'plasticboy/vim-markdown'
+"}}}
+" GIT {{{
+Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'ctrlpvim/ctrlp.vim'
-Plug 'scrooloose/nerdcommenter'
+" }}}
+
+Plug 'ryanoasis/vim-devicons' " icons
+Plug 'ap/vim-css-color'
 
 Plug 'christoomey/vim-tmux-navigator'
-
-" Status Line
-Plug 'itchyny/lightline.vim'
 
 call plug#end()
 
 " vim settinga
-colorscheme iceberg
+colorscheme dracula
 
 if !has('gui_running')
   set t_Co=256
@@ -72,13 +113,26 @@ let g:NERDTreeIgnore = ['^node_modules$']
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
 
 " coc config
+"let g:coc_global_extensions = [
+"  \ 'coc-snippets',
+"  \ 'coc-pairs',
+"  \ 'coc-tsserver',
+"  \ 'coc-eslint',
+"  \ 'coc-prettier',
+"  \ 'coc-json',
+"  \ ]
+
+" auto folds
 let g:coc_global_extensions = [
   \ 'coc-snippets',
   \ 'coc-pairs',
   \ 'coc-tsserver',
-  \ 'coc-eslint',
-  \ 'coc-prettier',
-  \ 'coc-json',
+  \ 'coc-eslint', 
+  \ 'coc-html', 
+  \ 'coc-css', 
+  \ 'coc-prettier', 
+  \ 'coc-json', 
+  \ 'coc-emoji',
   \ ]
 
 " Use <c-space> to trigger completion.
@@ -86,8 +140,35 @@ inoremap <silent><expr> <c-space> coc#refresh()
 
 " Lightline
 let g:lightline = {
-      \ 'colorscheme': 'iceberg',
+      \ 'colorscheme': 'dracula',
       \ }
 
-"
 "let g:coc_node_path ='/Users/ethan/.nvm/versions/node/v10.16.0/bin/node'
+
+" Gitgutter config for darkula
+" hi! link GitGutterAdd GitAddStripe
+" hi! link GitGutterChange GitChangeStripe
+" hi! link GitGutterDelete GitDeleteStripe
+" let g:gitgutter_sign_removed = '▶'
+
+" coc config
+" ======
+" use tab
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+"use enter to confirm completion
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
+
