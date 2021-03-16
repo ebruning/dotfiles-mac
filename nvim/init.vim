@@ -27,6 +27,8 @@ Plug 'junegunn/goyo.vim' " start menu
 "Plug 'Valloric/YouCompleteMe', { 'do': './install.py' }
 "Plug 'sheerun/vim-polyglot' "all lang packs :)
 
+" terminal
+Plug 'erietz/vim-terminator'
 
 "JS {{{
 Plug 'https://github.com/pangloss/vim-javascript.git'
@@ -61,6 +63,8 @@ Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
 
+let mapleader = " " " map leader to Space
+
 " vim settinga
 colorscheme dracula
 
@@ -82,15 +86,6 @@ set noshowmode  " Don't show mode since using status line
 set hidden
 set cmdheight=2
 
-" MacVim specific settings
-if has("gui_macvim")
-  set guifont=Hack\ Nerd\ Font:h14
-endif
-
-" Commenter
-vmap ++ <plug>NERDCommenterToggle
-nmap ++ <plug>NERDCommenterToggle
-
 " Nerd Tree
 nmap <C-n> :NERDTreeToggle<CR>
 let g:NERDTreeGitStatusWithFlags = 1
@@ -111,16 +106,6 @@ let g:NERDTreeIgnore = ['^node_modules$']
 
 " CTRL-P
 let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
-
-" coc config
-"let g:coc_global_extensions = [
-"  \ 'coc-snippets',
-"  \ 'coc-pairs',
-"  \ 'coc-tsserver',
-"  \ 'coc-eslint',
-"  \ 'coc-prettier',
-"  \ 'coc-json',
-"  \ ]
 
 " auto folds
 let g:coc_global_extensions = [
