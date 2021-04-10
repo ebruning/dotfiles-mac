@@ -23,11 +23,15 @@ eval "$(rbenv init -)"
 
 alias vi=nvim
 alias diff="diff-so-fancy"
-alias ls="exa -hF"
+alias ls="exa -bl --git --icons --time-style long-iso --group-directories-first"
+[ -f "$HOMEBREW_HOME/bin/hub" ] && alias git=hub
+
+eval "$(rbenv init -)"
+eval "$(pyenv init -)"
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && . "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm
+[ -s "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm" ] && . "/opt/homebrew/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
@@ -38,15 +42,3 @@ if [ -f '/Users/ethan/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/ethan/goo
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/ethan/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/ethan/google-cloud-sdk/completion.zsh.inc'; fi
 
-## Source machine specific files
-case "$(uname -s)" in
-    Linux*)
-    	source $HOME/linux.zsh
-	;;
-    Darwin*)
-	source $HOME/mac.zsh
-	if [[ "$(hostname)" != "zendrivembp" ]] then
-	  source $HOME/work.zsh
-	fi
-	;;
-esac
