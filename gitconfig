@@ -1,6 +1,6 @@
 # This is Git's per-user configuration file.
 [user]
-  name = Ethan Bruning
+	name = Ethan Bruning
 
 [core]
   excludesfile = /Users/ethan/.gitignore_global
@@ -12,7 +12,9 @@
   oldHighlight = red bold 52
   newNormal = green bold
   newHighlight = green bold 22
-[alia]
+
+[alias]
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+
 [mergetool]
   keepBackup = true
