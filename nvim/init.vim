@@ -15,6 +15,8 @@ Plug 'mhinz/vim-startify'
 Plug 'cocopon/iceberg.vim'
 Plug 'doums/darcula'
 Plug 'dracula/vim', { 'name': 'dracula' }
+Plug 'chriskempson/base16-vim'
+Plug 'jacoborus/tender.vim'
 
 " Side bars{{{
 Plug 'scrooloose/nerdtree'		" NERD Tree
@@ -29,6 +31,9 @@ Plug 'junegunn/goyo.vim' " start menu
 
 " terminal
 Plug 'erietz/vim-terminator'
+
+Plug 'nvim-lua/plenary.nvim'
+Plug 'folke/todo-comments.nvim'
 
 "JS {{{
 Plug 'https://github.com/pangloss/vim-javascript.git'
@@ -65,8 +70,14 @@ call plug#end()
 
 let mapleader = " " " map leader to Space
 
+if (has("termguicolors"))
+ set termguicolors
+endif
+
+syntax enable
+	
 " vim settinga
-colorscheme dracula
+colorscheme tender
 
 if !has('gui_running')
   set t_Co=256
