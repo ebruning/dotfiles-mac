@@ -14,8 +14,8 @@ plugins=(git aws)
 source $ZSH/oh-my-zsh.sh
 
 # User configuration
-set -o vi
-export EDITOR=vi
+set -o nvim
+export EDITOR=nvim
 unsetopt correctall
 
 export PYENV_ROOT="$HOME/.pyenv"
@@ -31,6 +31,7 @@ alias mkdir="ptmkdir"
 alias touch="pttouch"
 alias cp="ptcp"
 alias rm="ptrm"
+alias f=ranger
 eval "$(pyenv init --path)"
 eval "$(rbenv init -)"
 eval "$(pyenv init -)"
