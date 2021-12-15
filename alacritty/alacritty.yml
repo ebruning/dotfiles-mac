@@ -1,5 +1,5 @@
 import:
-  - /Users/ethan/.config/alacritty/colors/dracula.yml      
+  - /Users/ethan/.config/alacritty/colors/gruvbox_dark.yml
 # Windows Customizations
 window:
   dimensions:
