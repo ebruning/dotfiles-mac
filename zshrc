@@ -4,7 +4,7 @@ ZSH_THEME=muse
 #ZSH_THEME=kolo
 #ZSH_THEME=simple
 
-plugins=(git aws)
+plugins=()
 
 source $ZSH/oh-my-zsh.sh
 
