@@ -1,6 +1,8 @@
 export ZSH="$HOME/.oh-my-zsh"
 export HOMEBREW_HOME="/opt/homebrew/bin"
-ZSH_THEME=awesomepanda
+ZSH_THEME=muse
+#ZSH_THEME=kolo
+#ZSH_THEME=simple
 
 plugins=(git aws)
 
