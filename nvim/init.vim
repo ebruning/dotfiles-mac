@@ -71,23 +71,21 @@ set noshowmode  " Don't show mode since using status line
 set hidden
 set cmdheight=1
 
-" Nerd Tree
-"nmap <C-n> :NERDTreeToggle<CR>
-"let g:NERDTreeGitStatusWithFlags = 1
-"    "\ "Staged"    : "#0ee375",  
-"    "\ "Modified"  : "#d9bf91",  
-"    "\ "Renamed"   : "#51C9FC",  
-"    "\ "Untracked" : "#FCE77C",  
-"    "\ "Unmerged"  : "#FC51E6",  
-"    "\ "Dirty"     : "#FFBD61",  
-"    "\ "Clean"     : "#87939A",  
-"    "\ "Ignored"   : "#808080"  
-"    "\ }                        
+" NerdTree start
+nmap <C-n> :NERDTreeToggle<CR>
+let g:NERDTreeGitStatusWithFlags = 1
+    "\ "Staged"    : "#0ee375",  
+    "\ "Modified"  : "#d9bf91",  
+    "\ "Renamed"   : "#51C9FC",  
+    "\ "Untracked" : "#FCE77C",  
+    "\ "Unmerged"  : "#FC51E6",  
+    "\ "Dirty"     : "#FFBD61",  
+    "\ "Clean"     : "#87939A",  
+    "\ "Ignored"   : "#808080"  
+    "\ }                        
 
-"let g:NERDTreeIgnore = ['^node_modules$']
-
-" CTRL-P
-" let g:ctrlp_user_command = ['.git/', 'git --git-dir=%s/.git ls-files -oc --exclude-standard']
+let g:NERDTreeIgnore = ['^node_modules$']
+" NerdTree end
 
 " auto folds
 "let g:coc_global_extensions = [
@@ -101,9 +99,6 @@ set cmdheight=1
 "  \ 'coc-json', 
 "  \ 'coc-emoji',
 "  \ ]
-
-" Use <c-space> to trigger completion.
-"inoremap <silent><expr> <c-space> coc#refresh()
 
 " ctrl-space search
 nnoremap <c-space> :FZF<CR>
@@ -144,3 +139,28 @@ else
   inoremap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
 endif
 
+" vim-startify start
+" returns all modified files of the current git repo
+" `2>/dev/null` makes the command fail quietly, so that when we are not
+" in a git repo, the list will be empty
+function! s:gitModified()
+    let files = systemlist('git ls-files -m 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+" same as above, but show untracked files, honouring .gitignore
+function! s:gitUntracked()
+    let files = systemlist('git ls-files -o --exclude-standard 2>/dev/null')
+    return map(files, "{'line': v:val, 'path': v:val}")
+endfunction
+
+let g:startify_lists = [
+        \ { 'type': 'files',     'header': ['   MRU']            },
+        \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+        \ { 'type': 'sessions',  'header': ['   Sessions']       },
+        \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+        \ { 'type': function('s:gitModified'),  'header': ['   git modified']},
+        \ { 'type': function('s:gitUntracked'), 'header': ['   git untracked']},
+        \ { 'type': 'commands',  'header': ['   Commands']       },
+        \ ]
+" vim-startify end
