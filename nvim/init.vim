@@ -85,6 +85,8 @@ let g:NERDTreeGitStatusWithFlags = 1
     "\ }                        
 
 let g:NERDTreeIgnore = ['^node_modules$']
+let NERDTreeBookmarksFile=expand("$HOME/.config/nvim/NERDTreeBookmarks")
+let NERDTreeShowBookmarks=1
 " NerdTree end
 
 " auto folds
@@ -100,7 +102,7 @@ let g:NERDTreeIgnore = ['^node_modules$']
 "  \ 'coc-emoji',
 "  \ ]
 
-" ctrl-space search
+" ctrl-space FZF
 nnoremap <c-space> :FZF<CR>
 
 function! CocCurrentFunction()
@@ -154,6 +156,12 @@ function! s:gitUntracked()
     return map(files, "{'line': v:val, 'path': v:val}")
 endfunction
 
+function! s:nerdtreeBookmarks()
+    let bookmarks = systemlist("cut -d' ' -f 2- ~/.config/nvim/NERDTreeBookmarks")
+    let bookmarks = bookmarks[0:-2] " Slices an empty last line
+    return map(bookmarks, "{'line': v:val, 'path': v:val}")
+endfunction
+
 let g:startify_lists = [
         \ { 'type': 'files',     'header': ['   MRU']            },
         \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
@@ -162,5 +170,6 @@ let g:startify_lists = [
         \ { 'type': function('s:gitModified'),  'header': ['   git modified']},
         \ { 'type': function('s:gitUntracked'), 'header': ['   git untracked']},
         \ { 'type': 'commands',  'header': ['   Commands']       },
+        \ { 'type': function('s:nerdtreeBookmarks'), 'header': ['   NERDTree Bookmarks']},
         \ ]
 " vim-startify end
