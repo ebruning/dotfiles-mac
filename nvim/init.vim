@@ -10,13 +10,14 @@ call plug#begin('~/.config/nvim/plugged')
 " Appearence {{{ "
 Plug 'itchyny/lightline.vim'		" Status line
 Plug 'morhetz/gruvbox'
+Plug 'mhinz/vim-startify'
 
 " Search
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 
 " Side bars{{{
-"Plug 'scrooloose/nerdtree'		" NERD Tree
-"Plug 'Xuyuanp/nerdtree-git-plugin' 	" show git status in Nerd tree
+Plug 'scrooloose/nerdtree'		" NERD Tree
+Plug 'Xuyuanp/nerdtree-git-plugin' 	" show git status in Nerd tree
 "Plug 'mbbill/undotree'
 "Plug 'preservim/tagbar'
 " }}}
