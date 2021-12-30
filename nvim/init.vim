@@ -9,6 +9,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Appearence {{{ "
 Plug 'itchyny/lightline.vim'		" Status line
+Plug 'itchyny/vim-gitbranch'
 Plug 'morhetz/gruvbox'
 Plug 'mhinz/vim-startify'
 
@@ -113,13 +114,13 @@ let g:lightline = {
       \ 'colorscheme': 'gruvbox',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'cocstatus', 'currentfunction', 'readonly', 'filename', 'modified' ] ]
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
       \ },
       \ 'component_function': {
-      \   'cocstatus': 'coc#status',
-      \   'currentfunction': 'CocCurrentFunction'
+      \   'gitbranch': 'FugitiveHead'
       \ },
       \ }
+
 " coc config
 " ======
 " use tab
