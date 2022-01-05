@@ -55,9 +55,10 @@ Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
 
-" vim settinga
+" vim settings
 colorscheme gruvbox
 
+set number relativenumber
 set encoding=utf-8
 set number
 set background=dark
