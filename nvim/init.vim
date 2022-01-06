@@ -15,6 +15,7 @@ Plug 'mhinz/vim-startify'
 
 " Search
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 
 " Side bars{{{
 Plug 'scrooloose/nerdtree'		" NERD Tree
@@ -105,7 +106,7 @@ let NERDTreeShowBookmarks=1
 "  \ ]
 
 " ctrl-space FZF
-nnoremap <c-space> :FZF<CR>
+nnoremap <c-space> :Files<CR>
 
 function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
