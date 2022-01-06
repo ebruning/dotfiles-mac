@@ -59,6 +59,16 @@ call plug#end()
 " vim settings
 colorscheme gruvbox
 
+let mapleader=" "
+set clipboard+=unnamedplus " always use the system clipboard
+set ignorecase
+set mouse=a
+set termguicolors
+
+" Split navigation
+nnoremap <leader>h :split<Return>
+nnoremap <leader>v :vsplit<Return>
+
 set number relativenumber
 set encoding=utf-8
 set number
