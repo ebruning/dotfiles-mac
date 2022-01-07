@@ -7,52 +7,46 @@ endif
 
 call plug#begin('~/.config/nvim/plugged')
 
-" Appearence {{{ "
-Plug 'itchyny/lightline.vim'		" Status line
-Plug 'itchyny/vim-gitbranch'
+" Appearence
 Plug 'morhetz/gruvbox'
 Plug 'mhinz/vim-startify'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
 
 " Search
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 
-" Side bars{{{
+" Side bars
 Plug 'scrooloose/nerdtree'		" NERD Tree
 Plug 'Xuyuanp/nerdtree-git-plugin' 	" show git status in Nerd tree
-"Plug 'mbbill/undotree'
-"Plug 'preservim/tagbar'
-" }}}
-Plug 'neoclide/coc.nvim', {'do': { -> coc#util#install()}} " Completion as in vscode
 
-"JS {{{
+" Autocomplete
+Plug 'neoclide/coc.nvim', {'branch': 'master', 'do': 'yarn install --frozen-lockfile'}
+
+"JS 
 Plug 'https://github.com/pangloss/vim-javascript.git'
 Plug 'posva/vim-vue'
-Plug 'prettier/vim-prettier'
+"Plug 'prettier/vim-prettier'
 Plug 'dense-analysis/ale' "ES-Lint
 Plug 'pangloss/vim-javascript'
 Plug 'heavenshell/vim-jsdoc', { 'for': ['javascript', 'javascript.jsx','typescript'],  'do': 'make install' }
-Plug 'honza/vim-snippets'
-Plug 'francoiscabrol/ranger.vim'
-Plug 'rbgrouleff/bclose.vim'
+"Plug 'honza/vim-snippets'
+"Plug 'francoiscabrol/ranger.vim'
+"Plug 'rbgrouleff/bclose.vim'
 "Plug 'SirVer/ultisnips'
-Plug 'albanm/vuetify-vim'
-"}}}
+"Plug 'albanm/vuetify-vim'
 
-" Markdown {{{
+" Markdown 
 Plug 'godlygeek/tabular'
 Plug 'plasticboy/vim-markdown'
-"}}}
 
-" GIT {{{
+" GIT 
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-" }}}
 
 Plug 'ryanoasis/vim-devicons' " icons
 Plug 'ap/vim-css-color'
-
-Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
 
@@ -122,16 +116,20 @@ function! CocCurrentFunction()
     return get(b:, 'coc_current_function', '')
 endfunction
 
-let g:lightline = {
-      \ 'colorscheme': 'gruvbox',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead'
-      \ },
-      \ }
+" airline config
+let g:airline#extensions#tabline#enabled = 0
+let g:airline_powerline_fonts = 1
+
+"let g:lightline = {
+"      \ 'colorscheme': 'gruvbox',
+"      \ 'active': {
+"      \   'left': [ [ 'mode', 'paste' ],
+"      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+"      \ },
+"      \ 'component_function': {
+"      \   'gitbranch': 'FugitiveHead'
+"      \ },
+"      \ }
 
 " coc config
 " ======
@@ -183,3 +181,16 @@ let g:startify_lists = [
         \ { 'type': function('s:nerdtreeBookmarks'), 'header': ['   NERDTree Bookmarks']},
         \ ]
 " vim-startify end
+
+" gitgutter config
+set signcolumn=yes
+let g:gitgutter_set_sign_backgrounds = 1
+let g:gitgutter_enabled = 1
+let g:gitgutter_map_keys = 0
+
+let g:gitgutter_sign_added = ""
+let g:gitgutter_sign_modified = ""
+let g:gitgutter_sign_removed = ""
+
+nmap ) <Plug>(GitGutterNextHunk)
+nmap ( <Plug>(GitGutterPrevHunk)
