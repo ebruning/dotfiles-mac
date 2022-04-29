@@ -1,11 +1,12 @@
 # This is Git's per-user configuration file.
 [user]
 	name = Ethan Bruning
-	email = ebruning@gmail.com
+#	email = ethan@fairmatic.com
 
 [core]
   excludesfile = /Users/ethan/.gitignore_global
-  pager = diff-so-fancy | less --tabs=4 -RFX
+  # pager = diff-so-fancy | less --tabs=4 -RFX
+  pager = delta
   editor = nvim
 
 [color "diff-highlight"]
@@ -20,3 +21,24 @@
 
 [mergetool]
   keepBackup = true
+
+[init]
+	defaultBranch = main
+
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+
+[merge]
+    conflictstyle = diff3
+
+[diff]
+    colorMoved = default
