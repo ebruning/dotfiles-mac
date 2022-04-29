@@ -1,4 +1,4 @@
-"install plug-vim
+" install plug-vim
 if empty(glob('~/.config/nvim/autoload/plug.vim'))
   silent !curl -fLo ~/.config/nvim/autoload/plug.vim --create-dirs
     \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
@@ -9,6 +9,7 @@ call plug#begin('~/.config/nvim/plugged')
 
 " Appearence
 Plug 'morhetz/gruvbox'
+Plug 'sainnhe/gruvbox-material'
 Plug 'mhinz/vim-startify'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -51,10 +52,11 @@ Plug 'ap/vim-css-color'
 call plug#end()
 
 " vim settings
-colorscheme gruvbox
+" colorscheme gruvbox
+colorscheme gruvbox-material
 
 let mapleader=" "
-set clipboard+=unnamedplus " always use the system clipboard
+"set clipboard+=unnamedplus " always use the system clipboard
 set ignorecase
 set mouse=a
 set termguicolors
@@ -65,7 +67,7 @@ nnoremap <leader>v :vsplit<Return>
 
 set number relativenumber
 set encoding=utf-8
-set number
+"set number
 set background=dark
 set laststatus=2
 set nocompatible                
@@ -77,6 +79,9 @@ set splitbelow
 set noshowmode  " Don't show mode since using status line
 set hidden
 set cmdheight=1
+set fillchars+=eob:\ 
+
+nnoremap <Space><Space> :%s/\<<C-r>=expand("<cword>")<CR>\>/
 
 " NerdTree start
 nmap <C-n> :NERDTreeToggle<CR>
